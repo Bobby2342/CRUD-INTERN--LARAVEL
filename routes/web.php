@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +44,16 @@ Route::delete('/deleteProduct/{id}', [ProductController::class, 'deleteProduct']
 
 Route::get('/search', [ProductController::class, 'searchProduct'])->name('searchProduct');
 
+Route::get('/login', [UserController::class, 'loginView'])->name('login');
+Route::post('/login', [UserController::class, 'submitLogin'])->name('submitLogin');
+Route::get('/signup', [UserController::class, 'signupView'])->name('signup');
+Route::post('/signup', [UserController::class, 'submitSignup'])->name('submitSignup');
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+Route::get('/auth/google/callback',[GoogleController::class,'handleGoogleCallback'])->name('handleGoogleCallback');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/mobiles', [CategoriesController::class, 'showMobileProducts'])->name('mobiles');
+Route::get('/music', [CategoriesController::class, 'showMusicProducts'])->name('music');
 
 
 

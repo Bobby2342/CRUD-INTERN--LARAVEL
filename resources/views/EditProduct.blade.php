@@ -1,20 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-    <nav class="nav justify-content-center">
-      <a class="nav-link active" href="/product"> View Products</a>
-      <a class="nav-link" href="#">Link</a>
-      <a class="nav-link disabled" href="#">Disabled link</a>
-    </nav>
+@include('header')
 
     <h1>Edit Product</h1>
     <form action="{{ route('editProduct', ['id' => $product->id]) }}" method="POST">
@@ -48,6 +32,11 @@
           <div class="form-group">
             <label for="">Product Price:</label>
             <input type="text" name="price" id="" value="{{$product->price}}" class="form-control" placeholder="" aria-describedby="helpId">
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
+          <div class="form-group">
+            <label for="">Product Categories:</label>
+            <input type="text" name="category" id="" value="{{$product->category}}" class="form-control" placeholder="" aria-describedby="helpId">
             <small id="helpId" class="text-muted">Help text</small>
           </div>
           <input name="" id="" class="btn btn-primary" type="submit" value="Update">

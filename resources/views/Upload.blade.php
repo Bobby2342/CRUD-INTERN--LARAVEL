@@ -34,6 +34,12 @@
             <input type="text" name="price" id="" class="form-control" placeholder="" aria-describedby="helpId">
             <small id="helpId" class="text-muted">Help text</small>
           </div>
+
+          <div class="form-group">
+            <label for="">Product Categories:</label>
+            <input type="text" name="category" id="" class="form-control" placeholder="" aria-describedby="helpId">
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
           <input name="" id="" class="btn btn-primary" type="submit" value="Upload">
 
     </form>
@@ -44,3 +50,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+

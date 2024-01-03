@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use GuzzleHttp\Psr7\Query;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class ProductController extends Controller
 
@@ -15,7 +16,7 @@ class ProductController extends Controller
 
     public function viewProduct(){
 
-        $products = Product::all();
+        $products = Product::paginate(2);
 
         return view('Product',['products'=> $products]);
     }
@@ -33,7 +34,8 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'imgurl'=>'required|string',
+            'category'=> 'required|string',
+            'imgurl'=>'nullable',
 
 
 
@@ -44,12 +46,13 @@ class ProductController extends Controller
 
         $product = Product::create([
             'name' => $validatedData['name'],
-            'image' => $imagePath,
+            'image' => 'storage/'.$imagePath,
             'description' => $validatedData['description'],
             'price' => $validatedData['price'],
+            'category' => $validatedData['category'],
             'imgurl'=>$validatedData['imgurl']
         ]);
-        return redirect()->back()->with('success', 'Form submitted successfully!');
+        return redirect()->route('viewProduct')->with('success', 'Form submitted successfully!');
 
     }
 
@@ -94,7 +97,10 @@ class ProductController extends Controller
 
     return redirect()->back()->with('success', 'Product added to cart!');
 }
+public function totalCart(Request $request , $id){
 
+
+}
 
 public function update(Request $request, $id)
 {
@@ -147,12 +153,15 @@ public function editProduct(Request $request, $id){
         'image' => 'nullable',
         'imgurl' => 'nullable',
         'price' => 'nullable',
+        'category'=>'nullable'
     ]);
     $product->name = $validatedData['name'];
     $product->description = $validatedData['description'];
     $product->image = $validatedData['image'];
     $product->imgurl = $validatedData['imgurl'];
     $product->price = $validatedData['price'];
+    $product->category = $validatedData['category'];
+
 
     $product->save();
 

@@ -9,6 +9,8 @@
             <th>Product</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Total Price</th>
+
         </tr>
         @foreach($cartProducts as $product)
             <tr>
@@ -34,6 +36,9 @@
                         <button type="submit">Remove</button>
                     </form>
                 </td>
+                <td>{{ $product->price * $cart[$product->id]['quantity'] }}</td>
+
+
             </tr>
         @endforeach
     </table>

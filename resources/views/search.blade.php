@@ -6,3 +6,4 @@
     @endforeach
 @endif
 <h1>No results found</h1>
+

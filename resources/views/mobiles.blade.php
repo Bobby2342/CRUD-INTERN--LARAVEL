@@ -1,21 +1,9 @@
-
 @include('header')
 
-<div class="container mt-5">
-    @if(session('success'))
-    <div class="alert alert-success">
-       <h1>{{ session('Product is Out of Stock') }}</h1>
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('Product is Still Available ') }}
-    </div>
-@endif
-<b>Latest Products</b>
+<div class="container">
+<b>Mobile Products</b>
 <br>
-    @foreach($products as $product)
+    @foreach($mobileProducts as $product)
     <div class="card" style="width: 18rem; float: left; margin:10px;padding: 10px 3px; height:600px ">
         <img class="card-img-top" src="{{$product->imgurl}}" style="width:200; height:300;" alt="Image here">
         <div class="card-body">
@@ -45,15 +33,7 @@
 
 
         </div>
-    </div><div class="pagination-links">
-        {{ $products->links() }}
     </div>
-</div>
 @endforeach
 
-
-
-
-
-
-
+</div>
