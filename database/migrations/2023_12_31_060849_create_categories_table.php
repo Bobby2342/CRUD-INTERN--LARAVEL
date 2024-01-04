@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
             $table->string('image');
-            $table->string('imgurl');
-            $table->string('price');
-            $table->unsignedBigInteger('category_id'); //for foreign key id declaration
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); //assigning foreign key
+            $table->string('displayname');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('categories');
     }
 };

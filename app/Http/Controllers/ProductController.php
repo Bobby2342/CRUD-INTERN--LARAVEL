@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use GuzzleHttp\Psr7\Query;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -13,14 +15,29 @@ class ProductController extends Controller
 {
 
 
+    public function slideProduct(){
+        $slideproducts = Product::paginate(2);
+
+
+        return view('welcome', ['slideproducts' => $slideproducts]);
+    }
+
 
     public function viewProduct(){
 
         $products = Product::paginate(2);
+        $data = [
+            'products'=> $products,
+        ];
 
-        return view('Product',['products'=> $products]);
+        return view('Product',$data);
     }
 
+    public function productDetails($id){
+        $productdetails = Product::find($id);
+
+        return view ('pdetails' ,compact('productdetails'));
+    }
 
     public function showForm(){
 
@@ -34,7 +51,7 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'category'=> 'required|string',
+            'selected_category'=> 'required',
             'imgurl'=>'nullable',
 
 
@@ -42,6 +59,7 @@ class ProductController extends Controller
         ]);
 
         $imagePath = $request->file('image')->store('images', 'public');
+        $selectedCategory = $request->input('selected_category');
 
 
         $product = Product::create([
@@ -49,7 +67,7 @@ class ProductController extends Controller
             'image' => 'storage/'.$imagePath,
             'description' => $validatedData['description'],
             'price' => $validatedData['price'],
-            'category' => $validatedData['category'],
+            'category_id' => $validatedData['selected_category'],
             'imgurl'=>$validatedData['imgurl']
         ]);
         return redirect()->route('viewProduct')->with('success', 'Form submitted successfully!');

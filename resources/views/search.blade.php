@@ -7,3 +7,6 @@
 @endif
 <h1>No results found</h1>
 
+<div class="pagination">
+    {{ $products->links() }}
+</div>

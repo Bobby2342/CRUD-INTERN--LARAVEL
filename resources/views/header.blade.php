@@ -18,6 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/slider.css">
+    <link rel="stylesheet" type="text/css" href="/css/pdetails.css">
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
@@ -29,22 +33,32 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <a href="#" class="nav-item active nav-link"> </a>
-                <a href="/cart" class="nav-item active nav-link"> View Cart</a>
-                <a href="/upload" class="nav item active nav-link">Sell Products</a>
-                <a href="/product" class="nav item active nav-link">Products</a>
-
-
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <a href="{{route('showCategory')}}" class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="{{route('mobiles')}}" class="dropdown-item">Mobile Phones</a>
-                        <a href="#" class="dropdown-item"> Laptop and Acessories</a>
-                        <a href="#" class="dropdown-item"> Fashions and Wearings  </a>
-                        <a href="{{route('music')}}" class="dropdown-item"> Music and Instrumnents  </a>
+
+                        @foreach ($categories as $cat )
+
+                        <a href="" class="dropdown-item">{{$cat->displayname}}</a>
+
+                        @endforeach
+
+
+
 
                     </div>
                 </li>
+                <a href="/product" class="nav item active nav-link">Products</a>
+                <a href="/cart" class="nav-item active nav-link"> View Cart</a>
+                <a href="/upload" class="nav item active nav-link">Sell Products</a>
+                <a href="/category" class="nav item active nav-link">Create Category</a>
+
+
+                <a href="#" class="nav-item active nav-link"> </a>
+
+
+
+
             </ul>
             @guest
             <a href="/login" class="nav-item active nav-link">Login </a>

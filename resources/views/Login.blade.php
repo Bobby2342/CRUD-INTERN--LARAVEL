@@ -39,7 +39,7 @@
     <form action="" method="post">
 
         <div class="form-group">
-         <a href="{{url ('auth/google')}}"><img src="https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg" style="width: 30; height:30" alt=""> Signup with Google</a>
+         <a href="{{url ('auth/google')}}"><img src="https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg" style="width: 30; height:30" alt=""> Sign in with Google</a>
         </a></div>
     </form>
 

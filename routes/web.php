@@ -17,13 +17,13 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/a', function () {
     dd('ok');
 });
+Route::get('/',[ProductController::class , 'slideProduct'])->name('slideProduct');
+
 Route::get('product',[ProductController::class , 'viewProduct'])->name('viewProduct');
+Route::get('pdetails/{id}',[ProductController::class , 'productDetails'])->name('productDetails');
 
 
 Route::get('/upload',[ProductController::class , 'showForm'])->name('showForm');
@@ -54,6 +54,19 @@ Route::get('/auth/google/callback',[GoogleController::class,'handleGoogleCallbac
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/mobiles', [CategoriesController::class, 'showMobileProducts'])->name('mobiles');
 Route::get('/music', [CategoriesController::class, 'showMusicProducts'])->name('music');
+Route::get('/category', [CategoriesController::class, 'viewCategory'])->name('viewCategory');
+Route::post('/category', [CategoriesController::class, 'createCategory'])->name('createCategory');
+
+Route::get('/viewcategory', [CategoriesController::class, 'fetchCategory'])->name('fetchCategory');
+Route::get('/editcategory/{id}', [CategoriesController::class, 'viewedit'])->name('viewedit');
+Route::put('/editcategory/{id}', [CategoriesController::class, 'updateCategory'])->name('updateCategory');
+Route::delete('/deletecategory/{id}', [CategoriesController::class, 'delCategory'])->name('delCategory');
+
+Route::get('/header', [CategoriesController::class, 'showCategory'])->name('showCategory');
+Route::get('/upload', [CategoriesController::class, 'dropdown'])->name('dropdown');
+
+
+
 
 
 

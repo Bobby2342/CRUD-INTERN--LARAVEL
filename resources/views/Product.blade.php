@@ -21,6 +21,8 @@
         <div class="card-body">
             <h5 class="card-title">{{ $product->name }}</h5>
             <p class="card-text">{{ $product->description }}</p>
+            <p class="card-text">{{ $product->category }}</p>
+
             <p><b>Price: ${{ $product->price }}</b></p>
             <form action="{{ route('addToCart') }}" method="POST">
                 @csrf
@@ -43,16 +45,19 @@
                     <button class="btn btn-danger" type="submit">Delete Product</button>
                 </form>
 
+                <a name="" id="" class="btn btn-primary" href="/pdetails" role="button">View Product</a>
+
 
         </div>
-    </div><div class="pagination-links">
-        {{ $products->links() }}
-    </div>
+
+</div>
 </div>
 @endforeach
 
 
-
+</div><div class="pagination">
+    {{ $products->links() }}
+</div>
 
 
 
