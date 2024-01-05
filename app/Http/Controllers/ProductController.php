@@ -14,18 +14,23 @@ class ProductController extends Controller
 
 {
 
-
+//here is slide product and recent both variables
     public function slideProduct(){
         $slideproducts = Product::paginate(2);
+        $recentproducts = Product::orderBy('created_at', 'desc')->take(4)->get();
+        $data=[
 
+            'slideproducts'=> $slideproducts,
+            'recentproducts'=>$recentproducts,
+        ];
 
-        return view('welcome', ['slideproducts' => $slideproducts]);
+        return view('welcome', $data);
     }
 
 
     public function viewProduct(){
 
-        $products = Product::paginate(2);
+        $products = Product::paginate(5);
         $data = [
             'products'=> $products,
         ];
@@ -34,9 +39,9 @@ class ProductController extends Controller
     }
 
     public function productDetails($id){
-        $productdetails = Product::find($id);
+        $productdetails = Product::findorFail($id);
 
-        return view ('pdetails' ,compact('productdetails'));
+        return view ('pdetails' ,['productdetails'=>$productdetails]);
     }
 
     public function showForm(){
@@ -113,7 +118,7 @@ class ProductController extends Controller
 
     $request->session()->put('cart', $cart);
 
-    return redirect()->back()->with('success', 'Product added to cart!');
+    return redirect()->route('viewCart')->with('success', 'Product added to cart!');
 }
 public function totalCart(Request $request , $id){
 
@@ -201,15 +206,36 @@ public function deleteProduct( $id){
     }
 }
 
-public function searchProduct(Request $request){
+public function searchProduct(Request $request)
+{
+    $query = $request->input('query');
 
-    $query = $request->input('query');//query is a search aspects in the search box
+    $products = Product::where('name', 'like', '%' . $query . '%')
+                        ->orWhere('description', 'like', '%' . $query . '%')
+                        ->orWhere('price', 'like', '%' . $query . '%')
+                        ->paginate(4); // Pagination should be called here
 
-    $products = Product::where('name','like',$query."%" )
-                        ->orWhere('description','like',$query."%")
-                        ->orWhere('price','like',$query."%" )
-                        ->get();
     return view('product', compact('products'));
+}
+
+
+public function category()  {
+
+    return $this->belongsTo(Category::class, 'category_id');
+
+}
+
+public function fetchProduct(){
+
+    $productcategories= Product::with('category')->get();
+
+    foreach ($productcategories as $product) {
+        $productName = $product->name;
+        $categoryName = $product->category->name; // Accessing category name
+        // Other operations or data manipulation...
+    }
+
+    return view('your_view', ['productcategories' => $productcategories]);
 }
 
 }

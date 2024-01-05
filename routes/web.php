@@ -22,6 +22,7 @@ Route::get('/a', function () {
 });
 Route::get('/',[ProductController::class , 'slideProduct'])->name('slideProduct');
 
+
 Route::get('product',[ProductController::class , 'viewProduct'])->name('viewProduct');
 Route::get('pdetails/{id}',[ProductController::class , 'productDetails'])->name('productDetails');
 
@@ -64,6 +65,12 @@ Route::delete('/deletecategory/{id}', [CategoriesController::class, 'delCategory
 
 Route::get('/header', [CategoriesController::class, 'showCategory'])->name('showCategory');
 Route::get('/upload', [CategoriesController::class, 'dropdown'])->name('dropdown');
+Route::get('/edit', [CategoriesController::class, 'dropdownEdit'])->name('dropdownEdit');
+Route::get('/mobile', [CategoriesController::class, 'showProduct'])->name('showProduct');
+Route::get('/fetchcategory', [ProductController::class, 'fetchProduct'])->name('fetchProduct');
+
+
+
 
 
 

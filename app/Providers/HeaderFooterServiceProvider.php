@@ -19,8 +19,8 @@ class HeaderFooterServiceProvider extends ServiceProvider
      * Bootstrap services.
      */
     public function boot(): void
-    {   
-        view()->composer(['header','Product'],function($view){
+    {
+        view()->composer(['header','Product','welcome', 'EditProduct'],function($view){
 
                 $view->with('categories',Category::all());
         });

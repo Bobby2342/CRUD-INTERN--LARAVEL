@@ -19,7 +19,7 @@
 
           <div class="form-group">
             <label for="">Product Image Url:</label>
-            <input type="text" name="imgurl" id="" class="form-control" placeholder="" aria-describedby="helpId">
+            <input type="text" name="imgurl" id="" class="form-control"  placeholder="" aria-describedby="helpId">
             <small id="helpId" class="text-muted">Help text</small>
           </div>
 
