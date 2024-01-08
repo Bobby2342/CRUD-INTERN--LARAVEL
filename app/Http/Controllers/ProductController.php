@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use GuzzleHttp\Psr7\Query;
+use Hamcrest\Core\AllOf;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -75,87 +77,10 @@ class ProductController extends Controller
             'category_id' => $validatedData['selected_category'],
             'imgurl'=>$validatedData['imgurl']
         ]);
-        return redirect()->route('viewProduct')->with('success', 'Form submitted successfully!');
+        return redirect()->route('viewProduct')->with('success', 'Product added successfully!');
 
     }
 
-    public function viewCart(Request $request)
-    {
-        $cart = $request->session()->get('cart', []);
-
-        $cartProducts = Product::whereIn('id', array_keys($cart))->get();
-
-        return view('cart', ['cartProducts' => $cartProducts, 'cart' => $cart]);
-    }
-
-
-    public function addToCart(Request $request)
-{
-    $productId = $request->input('product_id');
-
-    $product = Product::find($productId);
-
-    if (!$product) {
-        return redirect()->back()->with('error', 'Product not found!');
-    }
-
-    if (!$request->session()->has('cart')) {
-        $request->session()->put('cart', []);
-    }
-
-    $cart = $request->session()->get('cart');
-
-    if (array_key_exists($productId, $cart)) {
-        $cart[$productId]['quantity']++;
-    } else {
-        $cart[$productId] = [
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => 1,
-        ];
-    }
-
-    $request->session()->put('cart', $cart);
-
-    return redirect()->route('viewCart')->with('success', 'Product added to cart!');
-}
-public function totalCart(Request $request , $id){
-
-
-}
-
-public function update(Request $request, $id)
-{
-    $quantity = $request->input('quantity');
-
-    $cart = $request->session()->get('cart', []);
-
-    if (array_key_exists($id, $cart)) {
-        $cart[$id]['quantity'] = $quantity;
-    }
-
-    $request->session()->put('cart', $cart);
-
-    return redirect()->route('viewCart')->with('success', 'Cart updated!');
-}
-
-public function delete(Request $request ,$id)
-{
-    {
-        $cart = $request->session()->get('cart', []);
-
-        if (array_key_exists($id, $cart)) {
-            unset($cart[$id]);
-        }
-
-        $request->session()->put('cart', $cart);
-
-        return redirect()->route('viewCart')->with('success', 'Product removed from cart!');
-    }
-
-
-}
 
 public function editProductForm($id)
 
@@ -183,7 +108,7 @@ public function editProduct(Request $request, $id){
     $product->image = $validatedData['image'];
     $product->imgurl = $validatedData['imgurl'];
     $product->price = $validatedData['price'];
-    $product->category = $validatedData['category'];
+    $product->category_id = $validatedData['category'];
 
 
     $product->save();
@@ -217,25 +142,18 @@ public function searchProduct(Request $request)
 
     return view('product', compact('products'));
 }
+public function fetchCat($categoryid){  //category fetched in divisions
+
+    $category = Category::findorFail($categoryid);
 
 
-public function category()  {
+    $data = [
 
-    return $this->belongsTo(Category::class, 'category_id');
+          'category' => $category,
 
+    ];
+
+    return view('Cat', $data);
 }
 
-public function fetchProduct(){
-
-    $productcategories= Product::with('category')->get();
-
-    foreach ($productcategories as $product) {
-        $productName = $product->name;
-        $categoryName = $product->category->name; // Accessing category name
-        // Other operations or data manipulation...
-    }
-
-    return view('your_view', ['productcategories' => $productcategories]);
-}
-
-}
+};

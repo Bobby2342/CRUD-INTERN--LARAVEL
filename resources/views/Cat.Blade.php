@@ -1,20 +1,9 @@
-
 @include('header')
+<h1>Category: {{$category->name}}</h1>
 
-<div class="container mt-5">
-    @if(session('success'))
-    <div class="alert alert-success">
-       <h1>{{ session('success') }}</h1>
-    </div>
-@endif
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-<b>Latest Products</b>
-<br>
+@if($category->products->count() > 0)
+
 
 
 <div class="container ">
@@ -22,7 +11,7 @@
     <div class="row">
 
 
-        @foreach($products as $product)
+        @foreach($category->products as $product)
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
                 <div class="product-image4" style="max-inline-size: 600pt">
@@ -58,7 +47,7 @@
                      Rs {{$product->price}}
                         <span>$16.00</span>
                     </div>
-                    <form action="{{route('addToCart',['id' => $product->id])}}" method="POST">
+                    <form action="" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <button type="submit" class="btn btn-primary">Add to cart</button>
@@ -73,10 +62,15 @@
 
 
 
+@else
+    <p>No products found in this category.</p>
+@endif
+
+
+{{--
 <div class="container">
 <div class="pagination">
     {{ $products->links() }}
 </div>
-</div>
-
+</div> --}}
 

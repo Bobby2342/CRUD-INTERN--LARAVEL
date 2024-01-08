@@ -60,10 +60,10 @@
                     <div class="product-content" style="align-content:center" >
                         <h3 class="title"><a href="#">{{$product->name}}</a></h3>
                         <div class="price">
-                          {{$product->price}}
+                          Rs {{$product->price}}
                             <span>$16.00</span>
                         </div>
-                        <form action="{{route('addToCart')}}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                              <a class="add-to-cart" name="product_id" value="{{$product->id}}" type="submit" href="">ADD TO CART</a>
                         </form>

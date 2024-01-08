@@ -35,7 +35,7 @@
 
                         @foreach ($categories as $cat )
 
-                        <a class="dropdown-item" href="">{{ $cat->displayname }}</a>
+                        <a class="dropdown-item" href="{{ route('fetchCat', ['categoryid' => $cat->id]) }}">{{ $cat->displayname }}</a>
 
                         @endforeach
 
@@ -48,6 +48,7 @@
                 <a href="/cart" class="nav-item active nav-link"> View Cart</a>
                 <a href="/upload" class="nav item active nav-link">Sell Products</a>
                 <a href="/category" class="nav item active nav-link">Create Category</a>
+                <a href="/contact" class="nav item active nav-link">Contact Us</a>
 
 
                 <a href="#" class="nav-item active nav-link"> </a>

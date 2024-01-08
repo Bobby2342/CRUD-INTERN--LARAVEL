@@ -49,7 +49,7 @@
                     </h5>
 
                     <div class="action">
-                        <form action="{{route('addToCart')}}" method="post">
+                        <form action="{{route('addToCart',['id' => $productdetails->id])}}" method="post">
                             @csrf
                         <button class="add-to-cart btn btn-dark" name="product_id" value="{{$productdetails->id}}" type="submit">add to cart</button>
                         <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>

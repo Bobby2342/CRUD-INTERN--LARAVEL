@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ContactController;
+use App\Models\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +33,7 @@ Route::get('pdetails/{id}',[ProductController::class , 'productDetails'])->name(
 Route::get('/upload',[ProductController::class , 'showForm'])->name('showForm');
 Route::post('/upload',[ProductController::class , 'submitForm'])->name('submitForm');
 
-Route::get('/cart',[ProductController::class , 'viewCart'])->name('viewCart');
 
-Route::post('/add-to-cart',[ProductController::class,'addToCart'])->name('addToCart');
-
-Route::put('/cart/{id}',[ProductController::class , 'update'])->name('updateCart');
-Route::delete('/cart/{id}', [ProductController::class, 'delete'])->name('deleteCart');
 
 Route::get('/products/{id}/edit', [ProductController::class, 'editProductForm'])->name('editProductForm');
 
@@ -67,7 +65,24 @@ Route::get('/header', [CategoriesController::class, 'showCategory'])->name('show
 Route::get('/upload', [CategoriesController::class, 'dropdown'])->name('dropdown');
 Route::get('/edit', [CategoriesController::class, 'dropdownEdit'])->name('dropdownEdit');
 Route::get('/mobile', [CategoriesController::class, 'showProduct'])->name('showProduct');
-Route::get('/fetchcategory', [ProductController::class, 'fetchProduct'])->name('fetchProduct');
+Route::get('/fetchcat/{categoryid}', [ProductController::class, 'fetchCat'])->name('fetchCat');
+
+//cart routes
+
+Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
+
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+
+//contact us
+Route::get('/contact', [ContactController::class, 'showContact'])->name('showContact');
+Route::post('/contact', [ContactController::class, 'submitContact'])->name('submitContact');
+
+
+
+
 
 
 
