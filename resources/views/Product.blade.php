@@ -30,6 +30,8 @@
                         <img class="pic-1" src="{{$product->imgurl}}">
                         <img class="pic-2" src="{{$product->image}}">
                     </a>
+                    @if(Auth::check())
+
                     <ul class="social">
                         <li><a href="{{route('productDetails',['id'=> $product->id])}}" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                        <li><form action="{{ route('editProductForm', ['id' => $product->id]) }}" method="GET">
@@ -52,6 +54,7 @@
                     <span class="product-new-label">New</span>
                     <span class="product-discount-label">-10%</span>
                 </div>
+                @endif
                 <div class="product-content" style="align-content:center" >
                     <h3 class="title"><a href="#">{{$product->name}}</a></h3>
                     <div class="price">
@@ -66,9 +69,9 @@
                 </div>
             </div>
         </div>
-        @endforeach
+
 <hr>
-    </div>
+    </div>      @endforeach
 </div>
 
 

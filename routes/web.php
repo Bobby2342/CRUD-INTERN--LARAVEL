@@ -1,13 +1,16 @@
 <?php
 
+use App\Models\Cart;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
-use App\Models\Cart;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,9 +83,17 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->n
 Route::get('/contact', [ContactController::class, 'showContact'])->name('showContact');
 Route::post('/contact', [ContactController::class, 'submitContact'])->name('submitContact');
 
+//profiles
+Route::get('/profile', [ProfileController::class, 'viewProfile'])->name('viewProfile');
+Route::post('/profile', [ProfileController::class, 'createProfile'])->name('createProfile');
 
 
+//citystatedropdown
 
+Route::get('/state', [DropdownController::class,'State']);
+Route::get('/city{$id}', [DropdownController::class,'City']);
+
+//chatbot
 
 
 

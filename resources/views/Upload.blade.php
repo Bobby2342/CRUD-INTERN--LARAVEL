@@ -65,3 +65,5 @@
         document.getElementById('triggerId').innerText = categoryName;
     }
 </script>
+
+

@@ -1,15 +1,11 @@
 @include('header')
 <div class="container">
-@if (session('status'))
+@if (session('success'))
 <div class="mb-4 font-medium text-sm text-green-600">
-    {{ session('status') }}
+    {{ session('success') }}
 </div>
 @endif
-@if (session('status'))
-<div class="mb-4 font-medium text-sm text-green-600">
-    {{ session('status') }}
-</div>
-@endif
+
 </div>
 <br>
 <div class="container mt-5">
@@ -22,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="">Password</label>
-            <input type="text" name="password" id="" class="form-control" placeholder="" aria-describedby="helpId">
+            <input type="password" name="password" id="" class="form-control" placeholder="" aria-describedby="helpId">
         </div>
 
         <button class="btn btn-dark" value="Login" type="submit">Login</button>
