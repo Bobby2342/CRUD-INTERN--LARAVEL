@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_id');
+            $table->integer('user_id');
+            $table->text('comment_body');
             $table->string('image');
-            $table->string('gender');
-            $table->string('location');
-            $table->string('user_id');
+            $table->integer('parent_id')->unsigned()->nullable();
 
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('comments');
     }
 };

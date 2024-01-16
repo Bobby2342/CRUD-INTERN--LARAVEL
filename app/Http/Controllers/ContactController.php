@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Faker\Guesser\Name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -44,5 +45,35 @@ class ContactController extends Controller
 
         return redirect()->back()->with('success', 'Message has been sent successfully!We will response back to you soon!');
     }
+
+    public function sendMessage(Request $request){
+
+        $name = (string) $request->input('name');
+        $email = (string) $request->input('email');
+        $message = (string) $request->input('message');
+
+        //send message
+
+        Mail::send('Contact',[
+
+            'name'=> $name,
+            'email'=> $email,
+            'messages'=> $message,
+
+
+
+            ],
+            function ($mail) use ($email,$name) {
+                $mail->from($email, $name); // Set the 'From' email and name
+                $mail->to('bgoogly0@gmail.com')->subject('New Contact Message !!');
+                $mail->replyTo($email, $name);
+    });
+    return redirect()->back()->with('success', 'Message has been sent successfully! Seller will response back soon');
+
+
+
+
     }
+
+}
 

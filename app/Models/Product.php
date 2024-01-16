@@ -19,4 +19,7 @@ class Product extends Model
     public function cart(){
         return $this->hasOne(Cart::class);
     }
+    public function comments(){
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
 }

@@ -16,7 +16,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'crud'),
+    'khalti_secret_key'=> env('KHALTI_SECRET_KEY'),
+    'khalti_public_key'=> env('KHALTI_PUBLIC_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,6 +162,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+
 
         /*
          * Application Service Providers...

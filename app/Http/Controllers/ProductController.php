@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductCreated;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
@@ -42,8 +43,9 @@ class ProductController extends Controller
 
     public function productDetails($id){
         $productdetails = Product::findorFail($id);
+        $comments = $productdetails->comments;
 
-        return view ('pdetails' ,['productdetails'=>$productdetails]);
+        return view ('pdetails' ,['productdetails'=>$productdetails ,'comments'=>$comments]);
     }
 
     public function showForm(){
@@ -76,7 +78,10 @@ class ProductController extends Controller
             'price' => $validatedData['price'],
             'category_id' => $validatedData['selected_category'],
             'imgurl'=>$validatedData['imgurl']
+
+
         ]);
+        event(new ProductCreated($product));
         return redirect()->route('viewProduct')->with('success', 'Product added successfully!');
 
     }
@@ -156,4 +161,19 @@ public function fetchCat($categoryid){  //category fetched in divisions
     return view('Cat', $data);
 }
 
+
+public function Checkout()  {
+
+
+    return view('Checkout');
+
+}
+
+
+
+
+
+
+
 };
+

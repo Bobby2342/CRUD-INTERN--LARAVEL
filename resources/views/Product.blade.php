@@ -20,8 +20,6 @@
 <div class="container ">
     <h3 class="h3">Recent Products </h3>
     <div class="row">
-
-
         @foreach($products as $product)
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
@@ -68,11 +66,10 @@
                     </form>
                 </div>
             </div>
-        </div>
 
-<hr>
-    </div>      @endforeach
-</div>
+        </div>
+        @endforeach
+    </div>
 
 
 

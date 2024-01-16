@@ -70,8 +70,8 @@
                             <strong>Rs{{ $item->product->price * $item->quantity }}</strong>
                           </p>
                           <div class="container">
-                            <a name="" id="" class="btn btn-primary" href="#" role="button">Checkout</a>
-                         </div>
+                            <a name="" id="" class="btn btn-primary" href="{{route('Checkout')}}" role="button">Checkout</a>
+                         </div>s
                     </div>
 
 
@@ -98,8 +98,8 @@
             <div class="card-body">
               <p><strong>We accept</strong></p>
               <img class="me-2" width="45px"
-                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                alt="Visa" />
+                src="https://api.v1.jobejee.com/v2/resource/employer-logo/3ca59d681613475477565.JPG"
+                alt="Khalti" />
               <img class="me-2" width="45px"
                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
                 alt="American Express" />

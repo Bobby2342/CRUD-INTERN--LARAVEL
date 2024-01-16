@@ -26,6 +26,9 @@ class UserController extends Controller
                 return redirect()->intended('/')->withSuccess('Signed In');
 
 
+            }else
+            {
+
             }
 
 
@@ -50,12 +53,20 @@ class UserController extends Controller
             'password' => 'required',
             'confirmpassword' => 'required|same:password'
         ]);
+        $existingUser = User::where('email', $validatedData['email'])->first();
+
+        if($existingUser){
+            return redirect('/signup')->withErrors('Email already exists !!');
+        }
 
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
         ]);
+
+
+
 
         return redirect('/login')->with('success', 'User signed up successfully');
     }

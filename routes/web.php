@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +96,17 @@ Route::get('/state', [DropdownController::class,'State']);
 Route::get('/city{$id}', [DropdownController::class,'City']);
 
 //chatbot
+Route::get('/checkout', [ProductController::class,'Checkout'])->name('Checkout');
+Route::post('/khalti', [PaymentController::class,'verifyPayment'])->name('verifyPayment');
+
+
+Route::post('/comment', [CommentController::class,'commentSubmit'])->name('commentSubmit');
+
+
+
+Route::post('/message', [ContactController::class,'sendMessage'])->name('sendMessage');
+
+
 
 
 
